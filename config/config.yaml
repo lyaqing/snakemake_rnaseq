@@ -11,7 +11,7 @@ units: config/samples.tsv
 ##### references
 refs:
   genome: "data/refs/chr1_Homo_sapiens.GRCh38.dna.primary_assembly.fa"
-  transcriptome: "data/refs/chr1_Homo_sapiens.GRCh38.cdna.all.fa"
+  transcriptome: "data/refs/Homo_sapiens.GRCh38.cdna.all.fa"
   ensembl_gtf: "data/refs/chr1_Homo_sapiens.GRCh38.109.gtf"
   refseq_gtf: "data/refs/chr1_GRCh38_latest_genomic.gtf"
 
