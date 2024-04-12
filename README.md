@@ -59,15 +59,15 @@ With conda: `snakemake --cores 10`
 
 
 ## Pipeline dependencies
-### Workflow management
+#### Workflow management
 * [Snakemake](https://snakemake.readthedocs.io/en/stable/)
-### Preprocess and quality control
+#### Preprocess and quality control
 * [fastp](https://github.com/OpenGene/fastp)
-### Alignment
+#### Alignment
 * [STAR](https://github.com/alexdobin/STAR)
 * [subread](http://subread.sourceforge.net/)
 * [HISAT2](https://daehwankimlab.github.io/hisat2/)
-### Quantification
+#### Quantification
 * [STAR](https://github.com/alexdobin/STAR)
 * [StringTie](https://ccb.jhu.edu/software/stringtie/)
 * [featureCounts (subread)](http://subread.sourceforge.net/)
@@ -76,19 +76,14 @@ With conda: `snakemake --cores 10`
 * [sailfish](https://sailfish.readthedocs.io/en/master/sailfish.html)
 * [kallisto](https://github.com/pachterlab/kallisto)
 * [RSME](https://github.com/deweylab/RSEM) with [Bowtie](https://bowtie-bio.sourceforge.net/index.shtml)
-### Normalization
+#### Normalization
 * [DESeq2](https://bioconductor.org/packages/release/bioc/html/DESeq2.html)
 * [edgeR]()
 * [NOISeq]()
 * [DESeq]()
-### DEGs analysis
+#### DEGs analysis
 Developing...
-
-
-## Acknowledgments :clap:
-[Johannes Köster](https://johanneskoester.bitbucket.io/); creator of Snakemake.
 
 # Citation
 If you use this software, please use the following citation:
-Wang D., Liu Y., et al.
-Bliek T., Chouaref J., van der Kloet F., Galland M. (2021). RNA-seq analysis pipeline (version 0.3.7). DOI: https://doi.org/10.5281/zenodo.4707140
+Wang D., Liu Y., et al. Toward Best Practice in Identifying Subtle Differential Expression with RNA-seq: A Real-World Multi-Center Benchmarking Study Using Quartet and MAQC Reference Materials. *bioRxiv* 2023.12.09.570956; doi: https://doi.org/10.1101/2023.12.09.570956
