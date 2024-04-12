@@ -1,0 +1,15 @@
+*~*
+logs/
+*.DS_Store
+.DS_Store
+*.snakemake
+
+results
+temp
+
+*.json
+.Rproj.user
+snakemake_rnaseq.Rproj
+data/
+scripts/
+test*.sh

@@ -1,0 +1,11 @@
+language: python
+python:
+  - "3.7.12"
+
+# # to be able to use Docker images
+# services:
+#   - docker
+
+# script:
+#   - docker pull bleekerlab/snakemake_rnaseq:0.3.2
+#   - docker run -v $PWD:/home/snakemake bleekerlab/snakemake_rnaseq:0.3.2 -n

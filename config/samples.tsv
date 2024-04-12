@@ -1,0 +1,2 @@
+sample	fq1	fq2	ss
+P_ARG_R1	data/fastq/sub_P_ARG_R1_R1.fq.gz	data/fastq/sub_P_ARG_R1_R2.fq.gz	true

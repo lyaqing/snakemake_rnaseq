@@ -1,0 +1,77 @@
+##### directories
+result_dir:  results/        # should be kept
+working_dir: temp/           # can be removed (temporary files)
+keep_working_dir: TRUE       # if TRUE then 'working_dir' is kept at the completion of the pipeline. if FALSE, it is deleted.
+
+
+##### samples to condition
+units: config/samples.tsv
+
+
+##### references
+refs:
+  genome: "data/refs/chr1_Homo_sapiens.GRCh38.dna.primary_assembly.fa"
+  transcriptome: "data/refs/chr1_Homo_sapiens.GRCh38.cdna.all.fa"
+  ensembl_gtf: "data/refs/chr1_Homo_sapiens.GRCh38.109.gtf"
+  refseq_gtf: "data/refs/chr1_GRCh38_latest_genomic.gtf"
+
+indexes:
+  star: "data/refs/index.star" # dir
+  hisat2: "data/refs/index.hisat2" # dir
+  subread: "data/refs/index.subread" # dir
+  rsem: "data/refs/index.rsem" # dir
+  kallisto: "data/refs/index.kallisto/transcripts.idx" # file
+  salmon: "data/refs/index.salmon" # dir
+  sailfish: "data/refs/index.sailfish"
+
+
+##### params for the global pipeline
+build_index: true        # steps to build an index can be skipped if the index already exists.
+annotation:
+  ensembl: true
+  refseq: false
+alignment:
+  hisat2: false
+  star: true
+  subread: false
+quantification:
+  star: false
+  stringtie: false
+  featurecounts: false
+  htseq: false
+  salmon: true
+  sailfish: false
+  kallisto: false
+  rsem: false
+
+
+
+
+##### params for specific rules
+# read quality trimming
+fastp:
+  qualified_quality_phred: 30 # Phred+33 score (> 15 for Proton Ion, > 30 or more for Illumina)
+
+
+# genome index step
+star_index:
+  sjdbOverhang: 100                     # as recommended in STAR manual https://github.com/alexdobin/STAR/blob/master/doc/STARmanual.pdf
+  limitGenomeGenerateRAM: 100000000000  # maximum available RAM (bytes) default is 31000000000 bytes = 31Gb
+  genomeSAindexNbases: 13               # 13 is optimal for tomato genome (around 1Gb)
+  genomeChrBinNbits: 18                 # 18 by default. (should be an integer). Reduce this number for a genome with large number of contigs,
+                                        # Scale this parameter as min(18, log2[max(GenomeLength/NumberOfReferences,ReadLength)]).
+
+# alignment step
+star:
+  samtype:                'BAM SortedByCoordinate' # type of output
+  mismatches:             '2'                      # alignment will be output only if it has less mismatches than this number
+  unmapped:               'None'                   # 'None' or 'Fastx' (to output fastq files of unmapped reads)
+  multimappers:           '10'                     # N number of loci the read is allowed to map to
+  matchminoverlengthread: '0.66'                   # alignment will be output if percentage of read length is higher than this value (66% of 2x100bp = 132 nucleotides)
+  intronmax:              '25000'                  # max intron in tomato genome is 22,729
+  matesgap:               '20000'                  # max length between mates
+  samattributes:          'All'         # SAM attributes (by default only NH HI AS nM). See STAR manual
+
+
+# featureCounts
+count_multimappers: FALSE                          # set to TRUE if you need to count multimappers (e.g. you have used the QuantSeq 3’ mRNA-Seq Library Prep)

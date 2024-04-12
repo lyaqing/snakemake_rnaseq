@@ -1,0 +1,10 @@
+name: sailfish 
+
+channels:
+  - bioconda
+  - anaconda
+
+dependencies:
+  - sailfish = 0.9.0
+  - python = 3.6.8
+  - boost = 1.60.0
