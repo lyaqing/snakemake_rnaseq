@@ -12,6 +12,8 @@ SAMPLES=samples.index.unique()
 
 # Include rules
 include: "rules/fastp.smk"
+include: "rules/fastqc.smk"
+include: "rules/qualimap.smk"
 include: "rules/star.smk"
 include: "rules/subread.smk"
 include: "rules/hisat2.smk"
@@ -34,8 +36,8 @@ def get_bam_paths(wildcards):
         paths.append(RESULT_DIR + "hisat2/{sample}.bam".format(sample=wildcards.sample))
     if config["alignment"]["subread"]:
         paths.append(RESULT_DIR + "subread/{sample}.bam".format(sample=wildcards.sample))
-    else:
-        raise ValueError('please specify only "true" or "false" for the "alignment" parameter in the config file.')
+    if not paths:
+        raise ValueError('please specify at least one "true" for the "alignment" parameter in the config file.')
     return paths
 
 # Utility function to convert BAM paths to BAI paths
@@ -86,6 +88,14 @@ enabled_outputs = [
 
 if not enabled_outputs:
     raise ValueError('Please specify at least one "true" for the "quantification" methods in the config file.')
+
+
+### Add QC reports
+fastqc_outputs = expand(RESULT_DIR + "fastqc/{sample}_{read}_trimmed_fastqc.{ext}", sample=SAMPLES, read=["R1", "R2"], ext=["html", "zip"])
+enabled_outputs.extend(fastqc_outputs)
+qualimap_outputs = expand(RESULT_DIR + "qualimap/{sample}_qualimap_{suffix}.tar.gz", sample=SAMPLES, suffix=["rnaseq", "bamqc"])
+enabled_outputs.extend(qualimap_outputs)
+
 
 rule all:
     input: enabled_outputs

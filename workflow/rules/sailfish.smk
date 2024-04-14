@@ -1,8 +1,8 @@
 rule sailfish_index:
     input:
-        fa = config["refs"]["transcriptome"]
+        fa = config["ref"]["transcriptome"]
     output:
-        index = directory(config["indexes"]["sailfish"])
+        index = directory(config["index"]["sailfish"])
     conda:
         "../envs/sailfish.yaml"
     shell:
@@ -13,7 +13,7 @@ rule sailfish_index:
 
 rule sailfish_quant:
     input:
-        index = config["indexes"]["sailfish"],
+        index = config["index"]["sailfish"],
         fq1 = WORKING_DIR + "trimmed/{sample}_R1_trimmed.fq.gz",
         fq2 = WORKING_DIR + "trimmed/{sample}_R2_trimmed.fq.gz"
     output:

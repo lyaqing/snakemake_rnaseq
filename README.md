@@ -1,7 +1,7 @@
 # RNA-seq analysis pipeline
 
 ## Description
-A Snakemake pipeline for the analysis of _messenger_ RNA-seq data. It processes paired-end mRNA-seq fastq files and delivers both raw and normalised/scaled count tables. This pipeline also outputs a QC report per fastq file and a `.bam` mapping file to use with a genome browser for instance.
+A Snakemake pipeline for the analysis of _messenger_ RNA-seq data. It processes paired-end mRNA-seq fastq files and delivers raw count tables. This pipeline also outputs a QC report per fastq file and a `.bam` mapping file to use with a genome browser for instance.
 
 
 ## Input files
@@ -15,8 +15,8 @@ A Snakemake pipeline for the analysis of _messenger_ RNA-seq data. It processes 
 ## Installation
 
 You will need a local copy of the GitHub `snakemake_rnaseq` repository on your machine. You can either:
-- use git in the shell: `git clone git@github.com:BleekerLab/snakemake_rnaseq.git`.
-- click on ["Clone or download"](https://github.com/BleekerLab/snakemake_rnaseq/archive/master.zip) and select `download`. 
+- use git in the shell: `git clone git@github.com:lyaqing/snakemake_rnaseq.git`.
+- click on ["Clone or download"](https://github.com/lyaqing/snakemake_rnaseq/archive/master.zip) and select `download`.
 - Then navigate inside the `snakemake_rnaseq` folder using Shell commands.
 
 ## Usage 
@@ -34,13 +34,9 @@ Using the mamba package manager, you need to create an environment where core so
 4. Then, before you run the Snakemake pipeline, activate this virtual environment with `mamba activate rnaseq`.
 
 
-### :whale: Option 2: Docker
+### :whale: Option 2: Docker/Singularity
 :round_pushpin: Option 2: using a Docker container  
 1. Install Docker desktop for your operating system.
-
-
-### :whale: Option 3: Singularity 
-1. Install singularity
 
 
 ## Dry run
@@ -76,12 +72,7 @@ With conda: `snakemake --cores 10`
 * [sailfish](https://sailfish.readthedocs.io/en/master/sailfish.html)
 * [kallisto](https://github.com/pachterlab/kallisto)
 * [RSME](https://github.com/deweylab/RSEM) with [Bowtie](https://bowtie-bio.sourceforge.net/index.shtml)
-#### Normalization
-* [DESeq2](https://bioconductor.org/packages/release/bioc/html/DESeq2.html)
-* [edgeR]()
-* [NOISeq]()
-* [DESeq]()
-#### DEGs analysis
+#### Normalization/DEGs analysis/...
 Developing...
 
 # Citation

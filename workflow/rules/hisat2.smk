@@ -1,11 +1,11 @@
 rule hisat2_index:
     input:
-        fa = config["refs"]["genome"],
-        gtf = lambda wc: config["refs"]["ensembl_gtf"] if config["annotation"]["ensembl"] else config["refs"]["refseq_gtf"]
+        fa = config["ref"]["genome"],
+        gtf = lambda wc: config["ref"]["ensembl_gtf"] if config["annotation"]["ensembl"] else config["ref"]["refeq_gtf"]
     output:
-        ss = config["indexes"]["hisat2"] + "/genome.ss",
-        exon = config["indexes"]["hisat2"] + "/genome.exon",
-        index = directory(config["indexes"]["hisat2"])
+        ss = config["index"]["hisat2"] + "/genome.ss",
+        exon = config["index"]["hisat2"] + "/genome.exon",
+        index = directory(config["index"]["hisat2"])
     message:
         "Generating HISAT2 genome index"
     shell:
@@ -17,12 +17,12 @@ rule hisat2_index:
 
 rule hisat2_alignment:
     input:
-        index = config["indexes"]["hisat2"],
+        index = config["index"]["hisat2"],
         fq1 = WORKING_DIR + "trimmed/{sample}_R1_trimmed.fq.gz",
         fq2 = WORKING_DIR + "trimmed/{sample}_R2_trimmed.fq.gz"
     output:
         bam = RESULT_DIR + "hisat2/{sample}.bam",
-        bai = RESULT_DIR + "hisat2/{sample}.bai",
+        bai = RESULT_DIR + "hisat2/{sample}.bam.bai",
         novel_splicesite = RESULT_DIR + "hisat2/{sample}.novel_splicesite.txt"
     log:
         RESULT_DIR + "logs/hisat2/{sample}.log"

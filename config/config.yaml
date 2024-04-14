@@ -9,13 +9,13 @@ units: config/samples.tsv
 
 
 ##### references
-refs:
-  genome: "data/refs/chr1_Homo_sapiens.GRCh38.dna.primary_assembly.fa"
-  transcriptome: "data/refs/chr1_Homo_sapiens.GRCh38.cdna.all.fa"
-  ensembl_gtf: "data/refs/chr1_Homo_sapiens.GRCh38.109.gtf"
-  refseq_gtf: "data/refs/chr1_GRCh38_latest_genomic.gtf"
+ref:
+  genome: "data/ref/chr1_Homo_sapiens.GRCh38.dna.primary_assembly.fa"
+  transcriptome: "data/ref/chr1_Homo_sapiens.GRCh38.cdna.all.fa"
+  ensembl_gtf: "data/ref/chr1_Homo_sapiens.GRCh38.109.gtf"
+  refeq_gtf: "data/ref/chr1_GRCh38_latest_genomic.gtf"
 
-indexes:
+index:
   star: "data/index/star" # dir
   hisat2: "data/index/hisat2" # dir
   subread: "data/index/subread" # dir
@@ -29,10 +29,10 @@ indexes:
 build_index: true        # steps to build an index can be skipped if the index already exists.
 annotation:
   ensembl: true
-  refseq: false
+  refeq: false
 alignment:
-  hisat2: false
   star: true
+  hisat2: false
   subread: false
 quantification:
   star: false

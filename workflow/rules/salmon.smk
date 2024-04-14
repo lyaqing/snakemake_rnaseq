@@ -1,9 +1,9 @@
 rule salmon_index:
     input:
-        transcriptome = config['refs']['transcriptome'],
-        genome = config['refs']['genome']
+        transcriptome = config['ref']['transcriptome'],
+        genome = config['ref']['genome']
     output:
-        index = directory(config['indexes']['salmon'])
+        index = directory(config['index']['salmon'])
     conda:
         "../envs/salmon.yaml"
     shell:
@@ -21,8 +21,8 @@ rule salmon_quant:
     input:
         fq1 = WORKING_DIR + "trimmed/{sample}_R1_trimmed.fq.gz",
         fq2 = WORKING_DIR + "trimmed/{sample}_R2_trimmed.fq.gz",
-        index = config['indexes']['salmon'],
-        gtf = lambda wc: config["refs"]["ensembl_gtf"] if config["annotation"]["ensembl"] else config["refs"]["refseq_gtf"]
+        index = config['index']['salmon'],
+        gtf = lambda wc: config["ref"]["ensembl_gtf"] if config["annotation"]["ensembl"] else config["ref"]["refeq_gtf"]
     output:
         quant_genes = RESULT_DIR + "salmon/{sample}/quant.genes.sf",
         quant = RESULT_DIR + "salmon/{sample}/quant.sf"

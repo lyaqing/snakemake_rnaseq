@@ -7,5 +7,5 @@ python:
 #   - docker
 
 # script:
-#   - docker pull bleekerlab/snakemake_rnaseq:0.3.2
-#   - docker run -v $PWD:/home/snakemake bleekerlab/snakemake_rnaseq:0.3.2 -n
+#   - docker pull lyaqing/snakemake_rnaseq:0.3.2
+#   - docker run -v $PWD:/home/snakemake lyaqing/snakemake_rnaseq:0.3.2 -n
