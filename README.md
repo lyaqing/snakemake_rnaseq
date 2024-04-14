@@ -35,7 +35,6 @@ Using the mamba package manager, you need to create an environment where core so
 
 
 ### :whale: Option 2: Docker/Singularity
-:round_pushpin: Option 2: using a Docker container  
 1. Install Docker desktop for your operating system.
 
 
