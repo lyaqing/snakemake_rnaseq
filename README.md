@@ -30,7 +30,7 @@ Mamba is an extremely fast and robust replacement for the Conda package manager 
 Using the mamba package manager, you need to create an environment where core softwares such as `Snakemake` will be installed.
 1. Install the [Miniconda3 distribution (>= Python 3.7 version)](https://docs.conda.io/en/latest/miniconda.html) for your OS (Windows, Linux or Mac OS X).
 2. Install Mamba into any other Conda-based Python distribution with `conda install -n base -c conda-forge mamba`.
-3. Inside a Shell window (command line interface), create a virtual environment named `rnaseq` using the `envs/environment.yaml` file with the following command: `mamba env create --name rnaseq --file environment.yaml`
+3. Inside a Shell window (command line interface), create a virtual environment named `rnaseq` using the `workflow/envs/environment.yaml` file with the following command: `mamba env create --name rnaseq --file workflow/envs/environment.yaml`
 4. Then, before you run the Snakemake pipeline, activate this virtual environment with `mamba activate rnaseq`.
 
 
