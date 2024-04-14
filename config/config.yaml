@@ -20,8 +20,8 @@ indexes:
   hisat2: "data/refs/index.hisat2" # dir
   subread: "data/refs/index.subread" # dir
   rsem: "data/refs/index.rsem" # dir
-  kallisto: "data/refs/index.kallisto/transcripts.idx" # file
   salmon: "data/refs/index.salmon" # dir
+  kallisto: "data/refs/index.kallisto/transcripts.idx" # file
   sailfish: "data/refs/index.sailfish"
 
 
@@ -39,9 +39,9 @@ quantification:
   stringtie: false
   featurecounts: false
   htseq: false
-  salmon: true
+  salmon: false
   sailfish: false
-  kallisto: false
+  kallisto: true
   rsem: false
 
 
