@@ -8,6 +8,8 @@ dependencies:
   - snakemake = 8.10.6
   - python = 3.6.8
   - fastp = 0.23.4
+  - fastqc = 0.12.1
+  - qualimap = 2.2.2
   - multiqc = 1.21
   - star = 2.7.10b
   - subread = 2.0.3

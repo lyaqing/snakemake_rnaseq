@@ -1,8 +1,8 @@
 rule subread_index:
     input:
-        fa = config["refs"]["genome"]
+        fa = config["ref"]["genome"]
     output:
-        index = directory(config["indexes"]["subread"])
+        index = directory(config["index"]["subread"])
     shell:
         "subread-buildindex -o {output.index} {input.fa}"
 
@@ -11,11 +11,11 @@ rule subread_alignment:
     input:
         fq1 = WORKING_DIR + "trimmed/{sample}_R1_trimmed.fq.gz",
         fq2 = WORKING_DIR + "trimmed/{sample}_R2_trimmed.fq.gz",
-        index = config["indexes"]["subread"],
-        gtf = lambda wc: config["refs"]["ensembl_gtf"] if config["annotation"]["ensembl"] else config["refs"]["refseq_gtf"]
+        index = config["index"]["subread"],
+        gtf = lambda wc: config["ref"]["ensembl_gtf"] if config["annotation"]["ensembl"] else config["ref"]["refeq_gtf"]
     output:
         bam = RESULT_DIR + "subread/{sample}.bam",
-        bai = RESULT_DIR + "subread/{sample}.bai"
+        bai = RESULT_DIR + "subread/{sample}.bam.bai"
     log:
         RESULT_DIR + "logs/subread/{sample}.log.txt"
     params:

@@ -2,7 +2,7 @@ rule stringtie:
     input:
         bam = lambda wc: get_bam_paths(wc),
         bai = lambda wc: bam_to_bai(get_bam_paths(wc)),
-        gtf = lambda wc: config["refs"]["ensembl_gtf"] if config["annotation"]["ensembl"] else config["refs"]["refseq_gtf"]
+        gtf = lambda wc: config["ref"]["ensembl_gtf"] if config["annotation"]["ensembl"] else config["ref"]["refeq_gtf"]
     output:
         gene_abundance = RESULT_DIR + "stringtie/{sample}.gene.abundance.txt",
         cov_ref_gtf = RESULT_DIR + "stringtie/{sample}.cov.ref.gtf",

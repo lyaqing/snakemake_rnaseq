@@ -1,8 +1,8 @@
 rule kallisto_index:
     input:
-        fa = config["refs"]["transcriptome"]
+        fa = config["ref"]["transcriptome"]
     output:
-        index = config['indexes']['kallisto']
+        index = config['index']['kallisto']
     message:
         "Indexing {input.fa} with Kallisto"
     conda:
@@ -16,7 +16,7 @@ rule kallisto_index:
 
 rule kallisto_quant:
     input:
-        index = config['indexes']['kallisto'],
+        index = config['index']['kallisto'],
         fq1 = WORKING_DIR + "trimmed/{sample}_R1_trimmed.fq.gz",
         fq2 = WORKING_DIR + "trimmed/{sample}_R2_trimmed.fq.gz"
     output:

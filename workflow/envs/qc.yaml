@@ -1,0 +1,9 @@
+name: qc 
+
+channels:
+  - bioconda
+  - anaconda
+
+dependencies:
+  - fastqc = 0.12.1
+  - qualimap = 2.2.2

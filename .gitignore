@@ -10,6 +10,8 @@ temp
 *.json
 .Rproj.user
 snakemake_rnaseq.Rproj
-data/
+data/index/*
+data/ref/*
+data/fastq/raw_fq
 scripts/
 test*.sh

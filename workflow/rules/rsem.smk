@@ -1,9 +1,9 @@
 rule rsem_prepare_reference:
     input:
-        gtf = lambda wc: config["refs"]["ensembl_gtf"] if config["annotation"]["ensembl"] else config["refs"]["refseq_gtf"],
-        fa = config["refs"]["genome"]
+        gtf = lambda wc: config["ref"]["ensembl_gtf"] if config["annotation"]["ensembl"] else config["ref"]["refeq_gtf"],
+        fa = config["ref"]["genome"]
     output:
-        index = directory(config["indexes"]["rsem"])
+        index = directory(config["index"]["rsem"])
     message:
         "Generating RSEM genome index"
     conda:
@@ -12,9 +12,10 @@ rule rsem_prepare_reference:
         "mkdir -p {output.index};"
         "rsem-prepare-reference --gtf {input.gtf} --bowtie {input.fa} {output.index}/rsem"
 
+
 rule rsem_calculate_expression:
     input:
-        index = config["indexes"]["rsem"],
+        index = config["index"]["rsem"],
         fq1 = WORKING_DIR + "trimmed/{sample}_R1_trimmed.fq.gz",
         fq2 = WORKING_DIR + "trimmed/{sample}_R2_trimmed.fq.gz"
     output:

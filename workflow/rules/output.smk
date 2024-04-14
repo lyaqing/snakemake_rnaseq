@@ -6,7 +6,7 @@ if config["count_multimappers"]:
   rule create_counts_table:
     input:
       bams = expand(RESULT_DIR + "star/{sample}_Aligned.sortedByCoord.out.bam", sample = SAMPLES),
-      gff  = config["refs"]["gtf"]
+      gff  = config["ref"]["gtf"]
     output:
       WORKING_DIR + "raw_counts.tsv"
     message: "Producing the table of raw counts (counting read multimappers)"
@@ -17,7 +17,7 @@ else:
   rule create_counts_table:
     input:
       bams = expand(RESULT_DIR + "star/{sample}_Aligned.sortedByCoord.out.bam", sample = SAMPLES),
-      gff  = config["refs"]["gtf"]
+      gff  = config["ref"]["gtf"]
     output:
       WORKING_DIR + "raw_counts.tsv"
     message: "Producing the table of raw counts (not counting multimappers)"
