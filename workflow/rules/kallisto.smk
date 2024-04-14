@@ -5,8 +5,13 @@ rule kallisto_index:
         index = config['indexes']['kallisto']
     message:
         "Indexing {input.fa} with Kallisto"
+    conda:
+        "../envs/kallisto.yaml"
     shell:
-        "kallisto index -i {output.index} ${fa}"
+        """
+        mkdir -p $(dirname {output.index});
+        kallisto index -i {output.index} {input.fa}
+        """
 
 
 rule kallisto_quant:
@@ -24,5 +29,10 @@ rule kallisto_quant:
         ss = lambda wildcards: '--rf-stranded' if samples.loc[wildcards.sample, 'ss'] == 'true' else ''
     message:
         "Quantifying {wildcards.sample} with Kallisto."
+    conda:
+        "../envs/kallisto.yaml"
     shell:
-        "kallisto quant -i {input.index} -o {params.output_dir} {params.ss} --bias {input.fq1} {input.fq2}"
+        """
+        mkdir -p {params.output_dir};
+        kallisto quant -i {input.index} -o {params.output_dir} {params.ss} --bias {input.fq1} {input.fq2}
+        """
