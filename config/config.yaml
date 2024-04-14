@@ -16,13 +16,13 @@ refs:
   refseq_gtf: "data/refs/chr1_GRCh38_latest_genomic.gtf"
 
 indexes:
-  star: "data/refs/index.star" # dir
-  hisat2: "data/refs/index.hisat2" # dir
-  subread: "data/refs/index.subread" # dir
-  rsem: "data/refs/index.rsem" # dir
-  salmon: "data/refs/index.salmon" # dir
-  kallisto: "data/refs/index.kallisto/transcripts.idx" # file
-  sailfish: "data/refs/index.sailfish"
+  star: "data/index/star" # dir
+  hisat2: "data/index/hisat2" # dir
+  subread: "data/index/subread" # dir
+  rsem: "data/index/rsem" # dir
+  salmon: "data/index/salmon" # dir
+  kallisto: "data/index/kallisto/transcripts.idx" # file
+  sailfish: "data/index/sailfish"
 
 
 ##### params for the global pipeline
