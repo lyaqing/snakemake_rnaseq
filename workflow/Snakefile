@@ -44,49 +44,49 @@ def bam_to_bai(bam_paths):
 
 
 ##### Define final outputs
-if config["quantification"]['star']:
-  rule all:
-    input:
-      expand(RESULT_DIR + "star/{sample}.ReadsPerGene.out.tab",sample=SAMPLES)
-elif config["quantification"]['stringtie']:
-  rule all:
-    input:
-      expand(RESULT_DIR + "stringtie/{sample}.gene.abundance.txt", sample=SAMPLES),
-      expand(RESULT_DIR + "stringtie/{sample}.cov.ref.gtf", sample=SAMPLES),
-      expand(RESULT_DIR + "stringtie/{sample}.ballgown.gtf", sample=SAMPLES)
-elif config["quantification"]['featurecounts']:
-  rule all:
-    input:
-      expand(RESULT_DIR + "featurecounts/{sample}", sample=SAMPLES),
-      expand(RESULT_DIR + "featurecounts/{sample}.jcounts", sample=SAMPLES),
-      expand(RESULT_DIR + "featurecounts/{sample}.summary", sample=SAMPLES)
-elif config["quantification"]['htseq']:
-  rule all:
-    input:
-      expand(RESULT_DIR + "htseq/{sample}.count", sample=SAMPLES)
-elif config["quantification"]['rsem']:
-  rule all:
-    input:
-      expand(RESULT_DIR + "rsem/{sample}.genes.results", sample=SAMPLES),
-      expand(RESULT_DIR + "rsem/{sample}.isoforms.results", sample=SAMPLES),
-      expand(RESULT_DIR + "rsem/{sample}.stat/{sample}.cnt", sample=SAMPLES),
-      expand(RESULT_DIR + "rsem/{sample}.stat/{sample}.model", sample=SAMPLES),
-      expand(RESULT_DIR + "rsem/{sample}.stat/{sample}.theta", sample=SAMPLES)
-elif config["quantification"]["kallisto"]:
-  rule all:
-    input:
-      expand(RESULT_DIR + "kallisto/{sample}/abundance.tsv", sample=SAMPLES),
-      expand(RESULT_DIR + "kallisto/{sample}/abundance.h5", sample=SAMPLES),
-      expand(RESULT_DIR + "kallisto/{sample}/run_info.json", sample=SAMPLES)
-elif config["quantification"]["sailfish"]:
-  rule all:
-    input:
-      expand(RESULT_DIR + "sailfish/{sample}/quant.sf", sample=SAMPLES)
-elif config["quantification"]["salmon"]:
-  rule all:
-    input:
-      expand(RESULT_DIR + "salmon/{sample}/quant.genes.sf", sample=SAMPLES),
-      expand(RESULT_DIR + "salmon/{sample}/quant.sf", sample=SAMPLES)
-else:
-  raise ValueError('please specify only "true" or "false" for the "quantification" parameter in the config file.')
+quantification_outputs = {
+    'star': [RESULT_DIR + "star/{sample}.ReadsPerGene.out.tab"],
+    'stringtie': [
+        RESULT_DIR + "stringtie/{sample}.gene.abundance.txt",
+        RESULT_DIR + "stringtie/{sample}.cov.ref.gtf",
+        RESULT_DIR + "stringtie/{sample}.ballgown.gtf"
+    ],
+    'featurecounts': [
+        RESULT_DIR + "featurecounts/{sample}",
+        RESULT_DIR + "featurecounts/{sample}.jcounts",
+        RESULT_DIR + "featurecounts/{sample}.summary"
+    ],
+    'htseq': [RESULT_DIR + "htseq/{sample}.count"],
+    'rsem': [
+        RESULT_DIR + "rsem/{sample}.genes.results",
+        RESULT_DIR + "rsem/{sample}.isoforms.results",
+        RESULT_DIR + "rsem/{sample}.stat/{sample}.cnt",
+        RESULT_DIR + "rsem/{sample}.stat/{sample}.model",
+        RESULT_DIR + "rsem/{sample}.stat/{sample}.theta"
+    ],
+    'kallisto': [
+        RESULT_DIR + "kallisto/{sample}/abundance.tsv",
+        RESULT_DIR + "kallisto/{sample}/abundance.h5",
+        RESULT_DIR + "kallisto/{sample}/run_info.json"
+    ],
+    'sailfish': [RESULT_DIR + "sailfish/{sample}/quant.sf"],
+    'salmon': [
+        RESULT_DIR + "salmon/{sample}/quant.genes.sf",
+        RESULT_DIR + "salmon/{sample}/quant.sf"
+    ]
+}
 
+# Generating a list of enabled quantification methods' outputs
+enabled_outputs = [
+    path
+    for method, paths in quantification_outputs.items()
+    if config["quantification"].get(method, False)
+    for path in expand(paths, sample=SAMPLES)
+]
+
+if not enabled_outputs:
+    raise ValueError('Please specify at least one "true" for the "quantification" methods in the config file.')
+
+rule all:
+    input: enabled_outputs
+    message: "Running all enabled quantification methods."
