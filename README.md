@@ -76,4 +76,5 @@ Developing...
 
 # Citation
 If you use this software, please use the following citation:
-Wang D., Liu Y., et al. Toward Best Practice in Identifying Subtle Differential Expression with RNA-seq: A Real-World Multi-Center Benchmarking Study Using Quartet and MAQC Reference Materials. *bioRxiv* 2023.12.09.570956; doi: https://doi.org/10.1101/2023.12.09.570956
+Wang D., Liu Y., et al. A real-world multi-center RNA-seq benchmarking study using the quartet
+and MAQC reference materials. *bioRxiv* 2023.12.09.570956; doi: https://doi.org/10.1101/2023.12.09.570956
