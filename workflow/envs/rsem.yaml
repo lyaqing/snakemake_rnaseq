@@ -1,8 +1,0 @@
-name: rsem 
-
-channels:
-  - bioconda
-  - anaconda
-
-dependencies:
-  - rsem=1.3.1

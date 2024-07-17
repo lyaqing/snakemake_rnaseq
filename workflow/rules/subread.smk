@@ -3,6 +3,8 @@ rule subread_index:
         fa = config["ref"]["genome"]
     output:
         index = directory(config["index"]["subread"])
+    conda:
+        "../envs/main.yaml"
     shell:
         "subread-buildindex -o {output.index} {input.fa}"
 
@@ -23,6 +25,8 @@ rule subread_alignment:
     message:
         "Mapping {wildcards.sample} reads to the genome using Subread."
     threads: 16
+    conda:
+        "../envs/main.yaml"
     shell:
         "mkdir -p {params.output_dir};"
         "subread-align -t 0 -T {threads} --multiMapping -B 2 -a {input.gtf} -i {input.index} -r {input.fq2} -R {input.fq1} | samtools sort -@ {threads} -o {output.bam}"

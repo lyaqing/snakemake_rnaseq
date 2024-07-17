@@ -6,7 +6,7 @@ rule kallisto_index:
     message:
         "Indexing {input.fa} with Kallisto"
     conda:
-        "../envs/kallisto.yaml"
+        "../envs/main.yaml"
     shell:
         """
         mkdir -p $(dirname {output.index});
@@ -30,7 +30,7 @@ rule kallisto_quant:
     message:
         "Quantifying {wildcards.sample} with Kallisto."
     conda:
-        "../envs/kallisto.yaml"
+        "../envs/main.yaml"
     shell:
         """
         mkdir -p {params.output_dir};

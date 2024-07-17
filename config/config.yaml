@@ -39,8 +39,8 @@ quantification:
   stringtie: false
   featurecounts: false
   htseq: false
-  salmon: false
-  sailfish: true
+  salmon: true
+  sailfish: false
   kallisto: false
   rsem: false
 

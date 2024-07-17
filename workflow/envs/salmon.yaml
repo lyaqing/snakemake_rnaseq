@@ -1,8 +1,26 @@
-name: salmon 
-
+name: salmon
 channels:
+  - http://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
   - bioconda
-  - anaconda
-
+  - conda-forge
+  - defaults
 dependencies:
-  - salmon=1.10.1
+  - _libgcc_mutex=0.1=conda_forge
+  - _openmp_mutex=4.5=2_gnu
+  - boost-cpp=1.78.0=h5adbc97_2
+  - bzip2=1.0.8=h5eee18b_6
+  - icu=70.1=h27087fc_0
+  - libgcc-ng=13.2.0=h77fa898_7
+  - libgomp=13.2.0=h77fa898_7
+  - libhwloc=2.9.1=hd6dc26d_0
+  - libiconv=1.17=hd590300_2
+  - libjemalloc=5.3.0=hcb278e6_0
+  - libstdcxx-ng=13.2.0=hc0a3c3a_7
+  - libxml2=2.10.3=hca2bb57_4
+  - libzlib=1.2.13=h4ab18f5_6
+  - lz4-c=1.9.4=h6a678d5_1
+  - salmon=1.10.1=hecfa306_2
+  - tbb=2021.9.0=hf52228f_0
+  - xz=5.4.6=h5eee18b_1
+  - zlib=1.2.13=h4ab18f5_6
+  - zstd=1.5.5=hc292b87_2

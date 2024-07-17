@@ -8,6 +8,8 @@ rule hisat2_index:
         index = directory(config["index"]["hisat2"])
     message:
         "Generating HISAT2 genome index"
+    conda:
+        "../envs/main.yaml"
     shell:
         "mkdir -p {output.index}; "
         "hisat2_extract_splice_sites.py {input.gtf} > {output.ss} &"
@@ -31,6 +33,8 @@ rule hisat2_alignment:
     message:
         "Mapping {wildcards.sample} reads to the genome using HISAT2."
     threads: 30
+    conda:
+        "../envs/main.yaml"
     shell:
         "mkdir -p {params.output_dir}; "
         "hisat2 -p {threads} -x {input.index}/genome --rna-strandness RF -1 {input.fq1} -2 {input.fq2} --novel-splicesite-outfile {output.novel_splicesite} | samtools view -Sb | samtools sort -o {output.bam}"

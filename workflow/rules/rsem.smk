@@ -7,7 +7,7 @@ rule rsem_prepare_reference:
     message:
         "Generating RSEM genome index"
     conda:
-        "../envs/rsem.yaml"
+        "../envs/main.yaml"
     shell:
         "mkdir -p {output.index};"
         "rsem-prepare-reference --gtf {input.gtf} --bowtie {input.fa} {output.index}/rsem"
@@ -27,7 +27,7 @@ rule rsem_calculate_expression:
     message:
         "Quantifying {wildcards.sample} using RSEM"
     conda:
-        "../envs/rsem.yaml"
+        "../envs/main.yaml"
     params:
         ss = lambda wildcards: '--strandedness reverse' if samples.loc[wildcards.sample, 'ss'] == 'true' else '--strandedness none',
         output_dir = RESULT_DIR + "rsem",

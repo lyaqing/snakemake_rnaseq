@@ -9,14 +9,14 @@ rule qualimap:
     log:
         stdout = RESULT_DIR + "logs/qualimap/{sample}.o",
         stderr = RESULT_DIR + "logs/qualimap/{sample}.e"
-    conda:
-        "../envs/qc.yaml"
     params:
         outdir = RESULT_DIR + "qualimap",
         lib_type = lambda wildcards: '-p strand-specific-reverse' if samples.loc[wildcards.sample, 'ss'] == 'true' else '-p non-strand-specific',
     resources:
         mem_gb = 100,
     threads: 10,
+    conda:
+        "../envs/qc.yaml"
     shell:
         """
         qualimap bamqc -bam {input.bam} \
@@ -31,18 +31,3 @@ rule qualimap:
         --java-mem-size={resources.mem_gb}G
         tar -zcvf {params.outdir}/{wildcards.sample}_qualimap_rnaseq.tar.gz {params.outdir}/{wildcards.sample}/rnaseq/*
         """
-
-
-# rule multiqc:
-#   input:
-#     expand(WORKING_DIR + "fastp/{sample}_fastp.json", sample = SAMPLES)
-#   output:
-#     RESULT_DIR + "multiqc_report.html"
-#   params:
-#     fastp_directory = WORKING_DIR + "fastp/",
-#     outdir = RESULT_DIR
-#   message: "Summarising fastp reports with multiqc"
-#   shell:
-#     "multiqc --force "
-#     "--outdir {params.outdir} "
-#     "{params.fastp_directory} "

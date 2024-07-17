@@ -8,6 +8,8 @@ rule htseq:
     threads: 30
     params:
          output_dir = RESULT_DIR + "htseq"
+    conda:
+        "../envs/main.yaml"
     shell:
         "mkdir -p {params.output_dir};"
         "htseq-count -n {threads} -s no -r pos {input.bam} {input.gtf} > {output.counts}"

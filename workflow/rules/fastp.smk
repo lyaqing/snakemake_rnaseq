@@ -14,5 +14,9 @@ rule fastp_trim:
         RESULT_DIR + "fastp/{sample}.log.txt"
     params:
         phred = config["fastp"]["qualified_quality_phred"]
+    conda:
+        "../envs/qc.yaml"
     shell:
-        "fastp --thread {threads} --in1 {input.fq1} --out1 {output.trimmed_fq1} --in2 {input.fq2} --out2 {output.trimmed_fq2} --html {output.html} --json {output.json} --qualified_quality_phred {params.phred}"
+        """
+        fastp --thread {threads} --in1 {input.fq1} --out1 {output.trimmed_fq1} --in2 {input.fq2} --out2 {output.trimmed_fq2} --html {output.html} --json {output.json} --qualified_quality_phred {params.phred}
+        """

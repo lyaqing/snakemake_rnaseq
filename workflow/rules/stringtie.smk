@@ -11,6 +11,8 @@ rule stringtie:
         output_dir = RESULT_DIR + "stringtie/",
         ss = lambda wildcards: '--rf' if samples.loc[wildcards.sample, 'ss'] == 'true' else ''
     threads: 60
+    conda:
+        "../envs/main.yaml"
     shell:
         "mkdir -p {params.output_dir};"
         "stringtie {input.bam} {params.ss} -e -p {threads} -G {input.gtf} -o {output.ballgown_gtf} -C {output.cov_ref_gtf} -A {output.gene_abundance}"

@@ -9,6 +9,8 @@ rule star_index:
         "Generating STAR genome index"
     threads: 10
     resources: mem_mb=100000
+    conda:
+        "../envs/main.yaml"
     shell:
         """
         mkdir -p {output.index};" # if directory not created STAR will ask for it
@@ -37,6 +39,8 @@ rule star_alignment:
         cpus=20,
     params:
         prefix = RESULT_DIR + "star/{sample}."
+    conda:
+        "../envs/main.yaml"
     shell:
         """
         STAR --genomeDir {input.index} --readFilesIn {input.fq1} {input.fq2} --runThreadN {threads} --readFilesCommand zcat --outFileNamePrefix {params.prefix} --outSAMtype BAM SortedByCoordinate --outSAMattributes All --quantMode GeneCounts --twopassMode Basic --outSAMunmapped Within

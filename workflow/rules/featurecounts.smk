@@ -10,6 +10,8 @@ rule featurecounts:
         output_dir = RESULT_DIR + "featurecounts",
         prefix = RESULT_DIR + "featurecounts/{sample}",
         ss = lambda wildcards: '-s 2' if samples.loc[wildcards.sample, 'ss'] == 'true' else '-s 0'
+    conda:
+        "../envs/main.yaml"
     shell:
         "mkdir -p {params.output_dir};"
         "featureCounts -a {input.gtf} -B -C -g gene_id -J -o {params.prefix} -p --countReadPairs {params.ss} -t exon {input.bam}"

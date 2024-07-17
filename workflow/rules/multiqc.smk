@@ -7,7 +7,9 @@ rule multiqc:
     fastp_directory = WORKING_DIR + "fastp/",
     outdir = RESULT_DIR
   message: "Summarising fastp reports with multiqc"
+  conda:
+    "../envs/qc.yaml"
   shell:
-    "multiqc --force "
-    "--outdir {params.outdir} "
-    "{params.fastp_directory} "
+    """
+    multiqc --force --outdir {params.outdir} {params.fastp_directory}
+    """

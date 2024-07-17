@@ -11,7 +11,7 @@ rule fastqc:
         outdir = RESULT_DIR + "fastqc"
     threads: 10
     conda:
-        "../envs/qc.yaml"
+        "../envs/mapping.yaml"
     shell:
         """
         fastqc {input.fq1} {input.fq2} -t {threads} -o {params.outdir}
