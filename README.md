@@ -76,5 +76,5 @@ Developing...
 
 # Citation
 If you use this software, please use the following citation:
-Wang D., Liu Y., et al. A real-world multi-center RNA-seq benchmarking study using the quartet
+Wang D., Liu Y., et al. A real-world multi-center RNA-seq benchmarking study using the Quartet
 and MAQC reference materials. *bioRxiv* 2023.12.09.570956; doi: https://doi.org/10.1101/2023.12.09.570956
